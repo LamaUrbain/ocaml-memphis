@@ -1,0 +1,24 @@
+OASISFormat: 0.4
+Name: ocaml-memphis
+Version: 0.1
+Synopsis: An OCaml binding of the Memphis library
+Authors: Jacques-Pascal Deplaix <jp.deplaix@gmail.com>
+License: MIT
+BuildTools: ocamlbuild
+Plugins: META (0.3), DevFiles (0.3)
+AlphaFeatures: compiled_setup_ml
+
+Library "memphis"
+  Path: src
+  Modules:
+    Memphis_debug,
+    Memphis_rule_set,
+    Memphis_map,
+    Memphis_renderer
+  InternalModules:
+    Glib
+  BuildDepends:
+    ctypes,
+    cairo2
+  ByteOpt: -w A
+  NativeOpt: -w A
