@@ -18,7 +18,8 @@ Library "memphis"
   InternalModules:
     Glib
   BuildDepends:
-    ctypes,
+    ctypes.foreign,
     cairo2
+  CCLib: -lmemphis-0.2
   ByteOpt: -w A
   NativeOpt: -w A
