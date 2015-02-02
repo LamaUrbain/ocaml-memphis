@@ -27,6 +27,11 @@ type t = unit ptr
 let t = ptr void
 let cairo_t = ptr void
 
+external cairo_raw_address : Cairo.context -> nativeint = "cairo_address"
+
+let ctypes_ptr_of_cairo_t (c : Cairo.context) : unit Ctypes.ptr =
+  ptr_of_raw_address (Int64.of_nativeint (cairo_raw_address c))
+
 let create_full =
   foreign "memphis_renderer_new_full" (Memphis_rule_set.t @-> Memphis_map.t @-> (returning t))
 
@@ -55,5 +60,5 @@ let draw_tile =
   foreign "memphis_renderer_draw_tile" (t @-> cairo_t @-> uint @-> uint @-> uint @-> (returning void))
 
 let draw_tile a b c d e =
-  let b = Obj.magic (b : Cairo.context) in
+  let b = ctypes_ptr_of_cairo_t b in
   draw_tile a b c d e
