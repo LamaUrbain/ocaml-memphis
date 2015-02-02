@@ -18,6 +18,7 @@ Library "memphis"
   CSources:
     memphis.c
   InternalModules:
+    Cairo_bind,
     Glib
   BuildDepends:
     ctypes.foreign,

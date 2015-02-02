@@ -20,39 +20,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *)
 
 open Ctypes
-open Foreign
 
 type t = unit ptr
 
 let t = ptr void
 
-let create_full =
-  foreign "memphis_renderer_new_full" (Memphis_rule_set.t @-> Memphis_map.t @-> (returning t))
+external cairo_raw_address : Cairo.context -> nativeint = "cairo_address"
 
-let destroy =
-  foreign "memphis_renderer_free" (t @-> (returning void))
-
-let set_resolution =
-  foreign "memphis_renderer_set_resolution" (t @-> uint @-> (returning void))
-
-let get_resolution =
-  foreign "memphis_renderer_get_resolution" (t @-> (returning uint))
-
-let get_min_x_tile =
-  foreign "memphis_renderer_get_min_x_tile" (t @-> uint @-> (returning int))
-
-let get_max_x_tile =
-  foreign "memphis_renderer_get_max_x_tile" (t @-> uint @-> (returning int))
-
-let get_min_y_tile =
-  foreign "memphis_renderer_get_min_y_tile" (t @-> uint @-> (returning int))
-
-let get_max_y_tile =
-  foreign "memphis_renderer_get_max_y_tile" (t @-> uint @-> (returning int))
-
-let draw_tile =
-  foreign "memphis_renderer_draw_tile" (t @-> Cairo_bind.t @-> uint @-> uint @-> uint @-> (returning void))
-
-let draw_tile a b c d e =
-  let b = Cairo_bind.create b in
-  draw_tile a b c d e
+let create c =
+  ptr_of_raw_address (Int64.of_nativeint (cairo_raw_address c))
