@@ -26,3 +26,20 @@ Library "memphis"
   CCLib: -lmemphis-0.2
   ByteOpt: -w A
   NativeOpt: -w A
+
+# +-------+
+# | Tests |
+# +-------+
+
+Executable "tile_renderer"
+  Path: demos
+  Build$: flag(tests)
+  Install: false
+  CompiledObject: native
+  MainIs: tile_renderer.ml
+  BuildDepends: memphis
+
+Test "tile-renderer"
+  Command: $tile_renderer
+  TestTools: tile_renderer
+  Run$: flag(tests)

@@ -1,0 +1,8 @@
+B _build
+B ../_build/src
+
+S .
+S ../src
+
+PKG ctypes
+PKG cairo2
