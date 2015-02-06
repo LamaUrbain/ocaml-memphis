@@ -61,9 +61,4 @@ let () =
       loop (succ i);
     end
   in
-  loop i;
-
-  Memphis_renderer.destroy r;
-  Memphis_map.destroy map;
-  Memphis_rule_set.destroy rules;
-  ()
+  loop i
