@@ -34,6 +34,11 @@ let create =
 let destroy =
   foreign "memphis_map_free" (t @-> (returning void))
 
+let create a =
+  let x = create a in
+  Gc.finalise destroy x;
+  x
+
 let load_from_file =
   foreign "memphis_map_load_from_file" (t @-> string @-> ptr Glib.gerror @-> (returning void))
 

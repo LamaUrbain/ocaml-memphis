@@ -27,6 +27,4 @@ val t : t Ctypes.typ
 
 val create : unit -> t
 
-val destroy : t -> unit
-
 val load_from_file : t -> string -> unit

@@ -25,8 +25,6 @@ type t
 
 val create_full : Memphis_rule_set.t -> Memphis_map.t -> t
 
-val destroy : t -> unit
-
 val set_resolution : t -> uint -> unit
 
 val get_resolution : t -> uint

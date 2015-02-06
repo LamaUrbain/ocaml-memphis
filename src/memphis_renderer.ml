@@ -32,6 +32,11 @@ let create_full =
 let destroy =
   foreign "memphis_renderer_free" (t @-> (returning void))
 
+let create_full a b =
+  let x = create_full a b in
+  Gc.finalise destroy x;
+  x
+
 let set_resolution =
   foreign "memphis_renderer_set_resolution" (t @-> uint @-> (returning void))
 

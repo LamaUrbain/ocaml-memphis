@@ -34,6 +34,11 @@ let create =
 let destroy =
   foreign "memphis_rule_set_free" (t @-> (returning void))
 
+let create a =
+  let x = create a in
+  Gc.finalise destroy x;
+  x
+
 let load_from_file =
   foreign "memphis_rule_set_load_from_file" (t @-> string @-> ptr Glib.gerror @-> (returning void))
 
